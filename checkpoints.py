@@ -56,7 +56,7 @@ class Solution:
                 continue
 
             index = (arr[i] - minVal) // delta
-            if index < (n - 1):
+            if index < (n):
                 if maxBucket[index] == INT_MIN:
                     maxBucket[index] = arr[i]
                 else:
