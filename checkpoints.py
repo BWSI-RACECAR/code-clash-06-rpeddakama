@@ -35,49 +35,19 @@ class Solution:
         # return type: int
         # TODO: Write code below to return an int with the solution to the prompt
 
-        if len(arr) == 0:
-            return 0
-        if len(arr) == 1:
-            return arr[0]
+        for i in range(len(arr)):
+            for j in range(i + 1, len(arr)):
+                if arr[j] < arr[i]:
+                    temp = arr[i]
+                    arr[i] = arr[j]
+                    arr[j] = temp
 
-        maxVal, minVal, n = arr[0], arr[0], len(arr)
-        INT_MIN, INT_MAX = float("-inf"), float("inf")
-        for i in range(1, n):
-            maxVal = max(maxVal, arr[i])
-            minVal = min(minVal, arr[i])
+        ret = arr[0]
+        for i in range(1, len(arr)):
+            if arr[i] - arr[i - 1] > ret:
+                ret = arr[i] - arr[i - 1]
 
-        maxBucket = [INT_MIN] * (n - 1)
-        minBucket = [INT_MAX] * (n - 1)
-
-        delta = (maxVal - minVal) // (n - 1)
-
-        for i in range(0, n):
-            if arr[i] == maxVal or arr[i] == minVal:
-                continue
-
-            index = (arr[i] - minVal) // delta
-            if index < (n):
-                if maxBucket[index] == INT_MIN:
-                    maxBucket[index] = arr[i]
-                else:
-                    maxBucket[index] = max(maxBucket[index], arr[i])
-
-                if minBucket[index] == INT_MAX:
-                    minBucket[index] = arr[i]
-                else:
-                    minBucket[index] = min(minBucket[index], arr[i])
-
-        prev_val, max_gap = minVal, 0
-
-        for i in range(0, n - 1):
-            if minBucket[i] == INT_MAX:
-                continue
-
-            max_gap = max(max_gap, minBucket[i] - prev_val)
-            prev_val = maxBucket[i]
-
-        max_gap = max(max_gap, maxVal - prev_val)
-        return max_gap
+        return ret
 
 
 def main():
