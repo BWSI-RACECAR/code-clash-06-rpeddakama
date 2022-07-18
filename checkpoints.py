@@ -33,8 +33,13 @@ class Solution:
     def longestdistance(self, arr):
         # type checkpoints: list
         # return type: int
-
         # TODO: Write code below to return an int with the solution to the prompt
+
+        if len(arr) == 0:
+            return 0
+        if len(arr) == 2:
+            return abs(arr[1] - arr[0])
+
         maxVal, minVal, n = arr[0], arr[0], len(arr)
         INT_MIN, INT_MAX = float("-inf"), float("inf")
         for i in range(1, n):
