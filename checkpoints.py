@@ -37,6 +37,8 @@ class Solution:
 
         if len(arr) == 0:
             return 0
+        if len(arr) == 1:
+            return arr[0]
         if len(arr) == 2:
             return abs(arr[1] - arr[0])
 
